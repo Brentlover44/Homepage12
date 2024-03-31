@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Saturn Movement</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="solar-system">
+    <div class="sun"></div>
+    <div class="orbit saturn-orbit" style="--orbit-duration: 20s;">
+        <div class="planet saturn">
+            <div class="rings"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
+
+/* style.css */
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #476f95;
+}
+
+.solar-system {
+    position: relative;
+    width: 800px;
+    height: 800px;
+}
+
+.orbit {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 400px; /* Adjust based on orbit size */
+    height: 300px; /* Adjust for elliptical orbit */
+    animation: orbit-animation var(--orbit-duration) linear infinite;
+}
+
+
+.saturn {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #FFD27D;
+    border-radius: 50%;
+    top: 0;
+    box-shadow: 0 0 20px #FFD27D; /* A glow effect */
+}
+
+.rings {
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    border: 2px solid #E2C49B;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(15deg);
+    box-shadow: 0 0 10px #E2C49B; /* A glow effect for the rings */
+}
+
+@keyframes orbit-animation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+// script.js
+$(document).ready(function() {
+    $('.saturn').on('click', function() {
+        // When Saturn is clicked, change its orbit duration
+        let newDuration = Math.random() * 30 + 10; // Between 10s and 40s
+        $(this).closest('.saturn-orbit').css('--orbit-duration', `${newDuration}s`);
+    });
+});
+
+
+
+
+
+
